@@ -1,0 +1,8 @@
+tensorflow
+keras
+mlflow
+flask
+numpy
+pillow
+pandas
+requests
