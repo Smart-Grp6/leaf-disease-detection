@@ -46,7 +46,7 @@ Start the MLflow tracking server:
    ```bash
    mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
 
-2. Train the model:
+Run the training script:
    ```bash
    python train.py
 The trained model and metrics will be logged to MLflow.
