@@ -22,10 +22,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Delete MLflow Database
-        run: |
-          rm -f mlruns.db  # Delete the existing database
-
       - name: Check if MLflow server is already running
         id: check_mlflow
         run: |
