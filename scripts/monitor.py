@@ -10,8 +10,8 @@ def trigger_retraining():
     # GitHub Actions API endpoint to trigger the workflow
     github_token = os.getenv("GITHUB_TOKEN")  # GitHub token for authentication
     repo_owner = "Smart-Grp6"  # GitHub username
-    repo_name = "leaf-disease-detection"  # Repository name
-    workflow_id = "retrain.yml"  
+    repo_name = "leaf-disease-detection1"  # Repository name
+    workflow_id = "retrain.yml"
     
     url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/actions/workflows/{workflow_id}/dispatches"
     headers = {
