@@ -4,19 +4,23 @@ import os
 import logging
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)  # Configure logging to display INFO-level messages
 
 def trigger_retraining():
+    """
+    Trigger a GitHub Actions workflow to retrain the model.
+    """
     # GitHub Actions API endpoint to trigger the workflow
-    github_token = os.getenv("GITHUB_TOKEN")  # GitHub token for authentication
-    repo_owner = "Smart-Grp6"  # GitHub username
-    repo_name = "leaf-disease-detection1"  # Repository name
-    workflow_id = "retrain.yml"
-    
+    github_token = os.getenv("GITHUB_TOKEN")  # Get GitHub token from environment variables
+    repo_owner = "Smart-Grp6"  # GitHub username or organization name
+    repo_name = "leaf-disease-detection"  # Repository name
+    workflow_id = "retrain.yml"  # Workflow file name
+
+    # Construct the URL for the GitHub API
     url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/actions/workflows/{workflow_id}/dispatches"
     headers = {
-        "Authorization": f"Bearer {github_token}",
-        "Accept": "application/vnd.github.v3+json"
+        "Authorization": f"Bearer {github_token}",  # Authenticate using the GitHub token
+        "Accept": "application/vnd.github.v3+json"  # Specify the API version
     }
     data = {
         "ref": "main"  # Branch to trigger the workflow on
@@ -30,28 +34,33 @@ def trigger_retraining():
         logging.error(f"Failed to trigger retraining. Status code: {response.status_code}, Response: {response.text}")
 
 def monitor_model():
-    # l'URI de suivi de MLflow
+    """
+    Monitor the model's performance and trigger retraining if model drift is detected.
+    """
+    # Set the MLflow tracking URI
     mlflow.set_tracking_uri("http://localhost:5000")  
 
-    # Charger les métriques de production depuis MLflow
-    runs = mlflow.search_runs()
+    # Load production metrics from MLflow
+    runs = mlflow.search_runs()  # Search for all runs in MLflow
     if runs.empty:
         logging.warning("No runs found in MLflow.")
         return
 
-    latest_run = runs.iloc[0]
-    production_accuracy = latest_run['metrics.accuracy']
+    # Get the latest run and its accuracy
+    latest_run = runs.iloc[0]  # Get the most recent run
+    production_accuracy = latest_run['metrics.accuracy']  # Extract the accuracy metric
     logging.info(f"Latest production accuracy: {production_accuracy}")
 
-    # Comparer avec la précision de référence
-    baseline_accuracy = 0.85  # Précision de réference
+    # Compare with the baseline accuracy
+    baseline_accuracy = 0.85  # Baseline accuracy threshold
     logging.info(f"Baseline accuracy: {baseline_accuracy}")
 
-    if production_accuracy < baseline_accuracy * 0.9:  # Une baisse de 10% de la précision
+    # Check for model drift (10% drop in accuracy)
+    if production_accuracy < baseline_accuracy * 0.9:  # If accuracy drops below 90% of baseline
         logging.warning("Model drift detected! Triggering retraining...")
-        trigger_retraining()  # Déclencher le processus de réentraînement
+        trigger_retraining()  # Trigger the retraining process
     else:
         logging.info("No model drift detected.")
 
 if __name__ == '__main__':
-    monitor_model() 
+    monitor_model()  # Run the model monitoring process
