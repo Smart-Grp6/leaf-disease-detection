@@ -1,0 +1,67 @@
+name: Retrain Model
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Run every Sunday at midnight
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Delete MLflow Database
+        run: |
+          rm -f mlruns.db  # Delete the existing database
+
+      - name: Check if MLflow server is already running
+        id: check_mlflow
+        run: |
+          if lsof -i :5000; then
+            echo "MLflow server is already running."
+            echo "mlflow_running=true" >> $GITHUB_OUTPUT
+          else
+            echo "MLflow server is not running."
+            echo "mlflow_running=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Start MLflow Tracking Server (if not running)
+        if: steps.check_mlflow.outputs.mlflow_running == 'false'
+        run: |
+          nohup mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns --host 0.0.0.0 --port 5000 > mlflow.log 2>&1 &
+          sleep 120
+
+      - name: Check MLflow Server Logs
+        run: |
+          cat mlflow.log
+
+      - name: Verify MLflow Server
+        run: |
+          curl http://localhost:5000 || echo "MLflow server is not running"
+
+      - name: Retrain model
+        run: |
+          export MLFLOW_TRACKING_URI="http://localhost:5000"
+          python train.py
+
+      - name: Deploy model
+        run: |
+          # Stop the existing Flask API (if running)
+          pkill -f "python app.py" || true
+
+          # Start the Flask API with the new model
+          nohup python app.py > app.log 2>&1 &
+
+          echo "Model deployed successfully!"

@@ -9,10 +9,10 @@ logging.basicConfig(level=logging.INFO)
 def trigger_retraining():
     # GitHub Actions API endpoint to trigger the workflow
     github_token = os.getenv("GITHUB_TOKEN")  # GitHub token for authentication
-    repo_owner = "Smart-Grp6"  # Replace with your GitHub username or organization
-    repo_name = "leaf-disease-detection"  # Replace with your repository name
-    workflow_id = "retrain.yml"  # Name of the workflow file
-
+    repo_owner = "Smart-Grp6"  # GitHub username
+    repo_name = "leaf-disease-detection"  # Repository name
+    workflow_id = "retrain.yml"  
+    
     url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/actions/workflows/{workflow_id}/dispatches"
     headers = {
         "Authorization": f"Bearer {github_token}",
@@ -54,4 +54,4 @@ def monitor_model():
         logging.info("No model drift detected.")
 
 if __name__ == '__main__':
-    monitor_model()
+    monitor_model() 
