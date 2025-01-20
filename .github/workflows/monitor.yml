@@ -22,6 +22,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Check for port conflicts
+        run: |
+          if lsof -i :5000; then
+            echo "Port 5000 is already in use."
+            exit 1
+          else
+            echo "Port 5000 is available."
+          fi  
+
       - name: Check if MLflow server is already running
         id: check_mlflow
         run: |
@@ -37,7 +46,7 @@ jobs:
         if: steps.check_mlflow.outputs.mlflow_running == 'false'
         run: |
           nohup mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns --host 0.0.0.0 --port 5000 > mlflow.log 2>&1 &
-          sleep 120  # Increase sleep duration to 120 seconds to ensure server starts
+          sleep 180  # Increase sleep duration to 120 seconds to ensure server starts
 
       - name: Check MLflow Server Logs
         run: |

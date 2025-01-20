@@ -3,7 +3,6 @@ import mlflow.keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from tensorflow.keras.preprocessing import image_dataset_from_directory
-import numpy as np
 
 # Set the tracking URI for the remote MLflow server
 mlflow.set_tracking_uri("http://localhost:5000")
