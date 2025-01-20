@@ -3,7 +3,7 @@ flavors:
   keras:
     data: data
     keras_backend: tensorflow
-    keras_version: 3.7.0
+    keras_version: 3.8.0
     save_exported_model: false
   python_function:
     env:
@@ -13,6 +13,6 @@ flavors:
     python_version: 3.12.3
 mlflow_version: 2.19.0
 model_size_bytes: 143600407
-model_uuid: b4ae8cd650234feb9aead27dd808660f
-run_id: 1641a11ca8634288ade706963c762e8d
-utc_time_created: '2025-01-20 15:53:38.756606'
+model_uuid: 5eba8856584c4045846e7f3be5d38a85
+run_id: 3ba435a0d508454eade5f4f80233584b
+utc_time_created: '2025-01-20 16:29:11.281790'
