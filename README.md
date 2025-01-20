@@ -27,17 +27,18 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
    ```bash
    git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
    cd leaf-disease-detection
-Create a virtual environment:
-```bash
-python -m venv venv
+   
+2. Create a virtual environment:
+   ```bash
+   python -m venv venv
 
-Activate the virtual environment:
-```bash
-.\venv\Scripts\activate
+3. Activate the virtual environment:
+   ```bash
+   .\venv\Scripts\activate
 
-Install the required packages:
-```bash
-pip install -r requirements.txt
+4. Install the required packages:
+   ```bash
+   pip install -r requirements.txt
 
 Usage
 1. Train the Model
