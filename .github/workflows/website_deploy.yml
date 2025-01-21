@@ -1,0 +1,57 @@
+name: Deploy Website
+
+on:
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Step 4: Start MLflow Tracking Server
+      - name: Start MLflow Tracking Server
+        run: |
+          nohup mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns --host 0.0.0.0 --port 5000 > mlflow.log 2>&1 &
+          sleep 120  # Wait for the server to start
+          echo "MLflow server started. Logs:"
+          cat mlflow.log
+
+      # Step 5: Start Flask API
+      - name: Start Flask API
+        run: |
+          nohup python app.py > app.log 2>&1 &
+          sleep 60  # Wait for the Flask API to start
+          echo "Flask API started. Logs:"
+          cat app.log
+
+      # Step 6: Deploy the Website
+      - name: Deploy Website
+        run: |
+          # Serve the website using a simple HTTP server
+          nohup python -m http.server 8000 --directory ./templates > website.log 2>&1 &
+          sleep 10  # Wait for the server to start
+          echo "Website deployed. Logs:"
+          cat website.log
+
+      # Step 7: Print URLs for the user
+      - name: Print URLs
+        run: |
+          echo "MLflow Tracking Server: http://localhost:5000"
+          echo "Flask API: http://localhost:5000"
+          echo "Website: http://localhost:8000"
