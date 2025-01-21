@@ -77,15 +77,17 @@ jobs:
       # Step 8: Start ngrok for Flask API
       - name: Start ngrok for Flask API
         run: |
-          ./ngrok http 5000 > ngrok_flask.log &
+          ./ngrok http 5000 > ngrok_flask.log 2>&1 &
           sleep 30  # Wait for ngrok to start
           echo "Flask API public URL:"
+          cat ngrok_flask.log
           grep "Forwarding" ngrok_flask.log | awk '{print $2}'
 
       # Step 9: Start ngrok for Website
       - name: Start ngrok for Website
         run: |
-          ./ngrok http 5001 > ngrok_website.log &
+          ./ngrok http 5001 > ngrok_website.log 2>&1 &
           sleep 30  # Wait for ngrok to start
           echo "Website public URL:"
+          cat ngrok_website.log
           grep "Forwarding" ngrok_website.log | awk '{print $2}'
