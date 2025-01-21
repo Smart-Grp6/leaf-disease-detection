@@ -27,67 +27,74 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
    ```bash
    git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
    cd leaf-disease-detection
-Create a virtual environment:
-python -m venv venv
+   
+2. Create a virtual environment:
+   ```bash
+   python -m venv venv
 
-Activate the virtual environment:
-On Windows:
-.\venv\Scripts\activate
+3. Activate the virtual environment:
+   ```bash
+   .\venv\Scripts\activate
 
-On macOS/Linux:
-source venv/bin/activate
+4. Install the required packages:
+   ```bash
+   pip install -r requirements.txt
 
-Install the required packages:
-pip install -r requirements.txt
-
-Usage
+### **3. Usage**
 1. Train the Model
-Start the MLflow tracking server:
-mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
+   - Start the MLflow tracking server:
+      ```bash
+      mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
 
-Train the model:
-python train.py
-The trained model and metrics will be logged to MLflow.
+   - Run the training script:
+      ```bash
+      python train.py
+   The trained model and metrics will be logged to MLflow.
 
-2. Serve Predictions
-Start the Flask API:
-python app.py
+3. Serve Predictions
+   Start the Flask API:
+      ```bash
+      python app.py
 
-Send a POST request to the API with an image file:
-curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
-The API will return the predicted class (e.g., Healthy, Powdery, Rust).
+4. Send a POST request to the API with an image file:
+      ```bash
+      curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
+   The API will return the predicted class (e.g., Healthy, Powdery, Rust).
 
-3. Monitor the Model
-Run the monitoring script:
-python scripts/monitor.py
-The script checks for model drift and triggers retraining if necessary.
+5. Monitor the Model
+   Run the monitoring script:
+      ```bash
+      python scripts/monitor.py
+   The script checks for model drift and triggers retraining if necessary.
 
 4. Automate Retraining
-The GitHub Actions workflow (.github/workflows/retrain.yml) automates retraining and deployment. It runs every Sunday at midnight or can be triggered manually.
-The GitHub Actions workflow (.github/workflows/monitor.yml) automates monitoring. It runs every hour or can be triggered manually.
+   - The GitHub Actions workflow (.github/workflows/retrain.yml) automates retraining and deployment. It runs every Sunday at midnight or can be triggered manually.
+   - The GitHub Actions workflow (.github/workflows/monitor.yml) automates monitoring. It runs every hour or can be triggered manually.
 
-CI/CD Pipeline
-The CI/CD pipeline automates the following steps:
+## **CI/CD Pipeline**
+**The CI/CD pipeline automates the following steps:**
 
-Checkout the code.
+   - **Checkout the code.**
 
-Install dependencies.
+   - **Install dependencies.**
 
-Retrain the model.
+   - **Check for drift.**
 
-Deploy the updated model.
+   - **Retrain the model.**
+
+   - **Deploy the updated model.**
 
 
-Acknowledgments
-TensorFlow for the deep learning framework.
+## **Acknowledgments**
+   - TensorFlow for the deep learning framework.
 
-MLflow for experiment tracking.
+   - MLflow for experiment tracking.
 
-Flask for serving predictions.
+   - Flask for serving predictions.
 
-GitHub Actions for CI/CD automation.
+   - GitHub Actions for CI/CD automation.
 
-Contact
+## **Contact**
 For questions or feedback, please contact:
 
 Email: arfalmahdi@gmail.com
