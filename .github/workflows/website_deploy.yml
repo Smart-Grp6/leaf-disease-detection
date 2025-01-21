@@ -67,11 +67,12 @@ jobs:
           echo "Website deployed. Logs:"
           cat website.log
 
-      # Step 7: Install ngrok
+      # Step 7: Install and update ngrok
       - name: Install ngrok
         run: |
           wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
           unzip ngrok-stable-linux-amd64.zip
+          ./ngrok update  # Update ngrok to the latest version
           ./ngrok authtoken 2rxOSTx3dUZV7ZFnz9ATxxPKEBi_81wqjfJiquaAY9qEqrBPw  # Replace with your ngrok auth token
 
       # Step 8: Start ngrok for Flask API
