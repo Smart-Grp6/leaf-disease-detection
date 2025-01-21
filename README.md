@@ -42,14 +42,14 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
 
 ### **3. Usage**
 1. Train the Model
-   Start the MLflow tracking server:
+   - Start the MLflow tracking server:
       ```bash
       mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
 
-      Run the training script:
-         ```bash
-         python train.py
-      The trained model and metrics will be logged to MLflow.
+   - Run the training script:
+      ```bash
+      python train.py
+   The trained model and metrics will be logged to MLflow.
 
 3. Serve Predictions
    Start the Flask API:
