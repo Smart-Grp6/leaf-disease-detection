@@ -62,14 +62,30 @@ jobs:
       - name: Deploy Website
         run: |
           # Serve the website using a simple HTTP server
-          nohup python -m http.server 8000 --directory ./templates > website.log 2>&1 &
-          sleep 10  # Wait for the server to start
+          nohup python -m http.server 5001 --directory ./templates > website.log 2>&1 &
+          sleep 30  # Wait for the server to start
           echo "Website deployed. Logs:"
           cat website.log
 
-      # Step 7: Print URLs for the user
-      - name: Print URLs
+      # Step 7: Install ngrok
+      - name: Install ngrok
         run: |
-          echo "MLflow Tracking Server: http://localhost:5000"
-          echo "Flask API: http://localhost:5000"
-          echo "Website: http://localhost:8000"
+          wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+          unzip ngrok-stable-linux-amd64.zip
+          ./ngrok authtoken 2rxOSTx3dUZV7ZFnz9ATxxPKEBi_81wqjfJiquaAY9qEqrBPw  # Replace with your ngrok auth token
+
+      # Step 8: Start ngrok for Flask API
+      - name: Start ngrok for Flask API
+        run: |
+          ./ngrok http 5000 > ngrok_flask.log &
+          sleep 30  # Wait for ngrok to start
+          echo "Flask API public URL:"
+          grep "Forwarding" ngrok_flask.log | awk '{print $2}'
+
+      # Step 9: Start ngrok for Website
+      - name: Start ngrok for Website
+        run: |
+          ./ngrok http 5001 > ngrok_website.log &
+          sleep 30  # Wait for ngrok to start
+          echo "Website public URL:"
+          grep "Forwarding" ngrok_website.log | awk '{print $2}'

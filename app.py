@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify, render_template
 from tensorflow.keras.utils import load_img, img_to_array
 from io import BytesIO
 import numpy as np
+from flask_cors import CORS
 
 # Set the tracking URI for the remote MLflow server
 mlflow.set_tracking_uri("http://localhost:5000")
@@ -23,6 +24,7 @@ model = mlflow.pyfunc.load_model(model_uri)  # Load the model using MLflow
 
 # Create a Flask application
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Route for the home page
 @app.route('/')
