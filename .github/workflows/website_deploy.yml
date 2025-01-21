@@ -25,12 +25,30 @@ jobs:
           pip install -r requirements.txt
 
       # Step 4: Start MLflow Tracking Server
-      - name: Start MLflow Tracking Server
+      - name: Check if MLflow server is already running
+        id: check_mlflow
+        run: |
+          if lsof -i :5000; then
+            echo "MLflow server is already running."
+            echo "mlflow_running=true" >> $GITHUB_OUTPUT
+          else
+            echo "MLflow server is not running."
+            echo "mlflow_running=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Start MLflow Tracking Server (if not running)
+        if: steps.check_mlflow.outputs.mlflow_running == 'false'
         run: |
           nohup mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns --host 0.0.0.0 --port 5000 > mlflow.log 2>&1 &
-          sleep 120  # Wait for the server to start
-          echo "MLflow server started. Logs:"
+          sleep 120
+
+      - name: Check MLflow Server Logs
+        run: |
           cat mlflow.log
+
+      - name: Verify MLflow Server
+        run: |
+          curl http://localhost:5000 || echo "MLflow server is not running"
 
       # Step 5: Start Flask API
       - name: Start Flask API
