@@ -68,31 +68,31 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
    The script checks for model drift and triggers retraining if necessary.
 
 4. Automate Retraining
-- The GitHub Actions workflow (.github/workflows/retrain.yml) automates retraining and deployment. It runs every Sunday at midnight or can be triggered manually.
-- The GitHub Actions workflow (.github/workflows/monitor.yml) automates monitoring. It runs every hour or can be triggered manually.
+   - The GitHub Actions workflow (.github/workflows/retrain.yml) automates retraining and deployment. It runs every Sunday at midnight or can be triggered manually.
+   - The GitHub Actions workflow (.github/workflows/monitor.yml) automates monitoring. It runs every hour or can be triggered manually.
 
 ## **CI/CD Pipeline**
 **The CI/CD pipeline automates the following steps:**
 
-- **Checkout the code.**
+   - **Checkout the code.**
 
-- **Install dependencies.**
+   - **Install dependencies.**
 
-- **Check for drift.**
+   - **Check for drift.**
 
-- **Retrain the model.**
+   - **Retrain the model.**
 
-- **Deploy the updated model.**
+   - **Deploy the updated model.**
 
 
 ## **Acknowledgments**
-- TensorFlow for the deep learning framework.
+   - TensorFlow for the deep learning framework.
 
-- MLflow for experiment tracking.
+   - MLflow for experiment tracking.
 
-- Flask for serving predictions.
+   - Flask for serving predictions.
 
-- GitHub Actions for CI/CD automation.
+   - GitHub Actions for CI/CD automation.
 
 ## **Contact**
 For questions or feedback, please contact:
