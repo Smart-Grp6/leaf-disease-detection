@@ -42,30 +42,30 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
 
 Usage
 1. Train the Model
-Start the MLflow tracking server:
-   ```bash
-   mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
+   Start the MLflow tracking server:
+      ```bash
+      mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
 
-Run the training script:
-   ```bash
-   python train.py
-The trained model and metrics will be logged to MLflow.
+   Run the training script:
+      ```bash
+      python train.py
+   The trained model and metrics will be logged to MLflow.
 
 3. Serve Predictions
-Start the Flask API:
-   ```bash
-   python app.py
+   Start the Flask API:
+      ```bash
+      python app.py
 
 4. Send a POST request to the API with an image file:
-   ```bash
-   curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
-The API will return the predicted class (e.g., Healthy, Powdery, Rust).
+      ```bash
+      curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
+   The API will return the predicted class (e.g., Healthy, Powdery, Rust).
 
 5. Monitor the Model
-Run the monitoring script:
-   ```bash
-   python scripts/monitor.py
-The script checks for model drift and triggers retraining if necessary.
+   Run the monitoring script:
+      ```bash
+      python scripts/monitor.py
+   The script checks for model drift and triggers retraining if necessary.
 
 4. Automate Retraining
 - The GitHub Actions workflow (.github/workflows/retrain.yml) automates retraining and deployment. It runs every Sunday at midnight or can be triggered manually.
