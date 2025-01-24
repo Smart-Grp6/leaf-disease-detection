@@ -12,7 +12,7 @@ def trigger_retraining():
     """
     # GitHub Actions API endpoint to trigger the workflow
     github_token = os.getenv("GITHUB_TOKEN")  # Get GitHub token from environment variables
-    repo_owner = "Smart-Grp6"  # GitHub username or organization name
+    repo_owner = "elmahdiarfal"  # GitHub username
     repo_name = "leaf-disease-detection"  # Repository name
     workflow_id = "retrain.yml"  # Workflow file name
 
