@@ -24,19 +24,23 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
 
 ### **2. Install Dependencies**
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
-   cd leaf-disease-detection
-   
-2. Create a virtual environment:
+      ```bash
+      git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
+      cd leaf-disease-detection
+   If you forked the repository, use your forked repository's URL:
+      git clone https://github.com/<YOUR_USERNAME>/leaf-disease-detection.git
+      cd leaf-disease-detection
+   Replace <YOUR_USERNAME> with your GitHub username.
+
+1. Create a virtual environment:
    ```bash
    python -m venv venv
 
-3. Activate the virtual environment:
+2. Activate the virtual environment:
    ```bash
    .\venv\Scripts\activate
 
-4. Install the required packages:
+3. Install the required packages:
    ```bash
    pip install -r requirements.txt
 
@@ -51,23 +55,32 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
       python train.py
    The trained model and metrics will be logged to MLflow.
 
-3. Serve Predictions
+2. Serve Predictions
    Start the Flask API:
       ```bash
       python app.py
 
-4. Send a POST request to the API with an image file:
+3. Send a POST request to the API with an image file:
       ```bash
       curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
+   Replace path_to_image.jpg with the path to your image file.
    The API will return the predicted class (e.g., Healthy, Powdery, Rust).
 
-5. Monitor the Model
-   Run the monitoring script:
+4. Monitor the Model
+   - Update Monitoring Script for Your Repository:
+      github_token = os.getenv("GITHUB_TOKEN")  # Set this in your environment
+      repo_owner = "<YOUR_USERNAME>"           # Replace with your GitHub username
+      repo_name = "leaf-disease-detection"     # Replace if you renamed the repository
+      workflow_id = "retrain.yml"              # Replace if you renamed the workflow file
+   github_token: Generate a GitHub Personal Access Token (PAT) with repo and workflow scopes, and set it as an environment variable:
+      ```bash
+      export GITHUB_TOKEN="your_token_here"
+   - Run the monitoring script:
       ```bash
       python scripts/monitor.py
    The script checks for model drift and triggers retraining if necessary.
 
-4. Automate Retraining
+5. Automate Retraining
    - The GitHub Actions workflow (.github/workflows/retrain.yml) automates retraining and deployment. It runs every Sunday at midnight or can be triggered manually.
    - The GitHub Actions workflow (.github/workflows/monitor.yml) automates monitoring. It runs every hour or can be triggered manually.
 
