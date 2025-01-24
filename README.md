@@ -28,44 +28,47 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
    ```bash
    git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
    cd leaf-disease-detection
-
+   ```
 - If you forked the repository, use your forked repository's URL:
    ```bash
    git clone https://github.com/<YOUR_USERNAME>/leaf-disease-detection.git
    cd leaf-disease-detection
+   ```
 Replace <YOUR_USERNAME> with your GitHub username.
 
 2. Create a virtual environment:
    ```bash
    python -m venv venv
-
+   ```
 3. Activate the virtual environment:
    ```bash
    .\venv\Scripts\activate
-
+   ```
 4. Install the required packages:
    ```bash
    pip install -r requirements.txt
-
+   ```
 ### **3. Usage**
 1. Train the Model
    - Start the MLflow tracking server:
       ```bash
       mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
-
+      ```
    - Run the training script:
       ```bash
       python train.py
+      ```
    The trained model and metrics will be logged to MLflow.
 
 2. Serve Predictions
    Start the Flask API:
       ```bash
       python app.py
-
+      ```
 3. Send a POST request to the API with an image file:
    ```bash
    curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
+   ```
 Replace path_to_image.jpg with the path to your image file.
 The API will return the predicted class (e.g., Healthy, Powdery, Rust).
 
