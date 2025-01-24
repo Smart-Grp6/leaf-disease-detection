@@ -70,18 +70,18 @@ Replace path_to_image.jpg with the path to your image file.
 The API will return the predicted class (e.g., Healthy, Powdery, Rust).
 
 4. Monitor the Model
-   - Update Monitoring Script for Your Repository:
-      github_token = os.getenv("GITHUB_TOKEN")  # Set this in your environment
-      repo_owner = "<YOUR_USERNAME>"           # Replace with your GitHub username
-      repo_name = "leaf-disease-detection"     # Replace if you renamed the repository
-      workflow_id = "retrain.yml"
-   github_token: Generate a GitHub Personal Access Token (PAT) with repo and workflow scopes, and set it as an environment variable:
-            ```bash
-            export GITHUB_TOKEN="your_token_here"
-   - Run the monitoring script:
-            ```bash
-            python scripts/monitor.py
-   The script checks for model drift and triggers retraining if necessary.
+- Update Monitoring Script for Your Repository:
+  github_token = os.getenv("GITHUB_TOKEN")  # Set this in your environment
+  repo_owner = "<YOUR_USERNAME>"           # Replace with your GitHub username
+  repo_name = "leaf-disease-detection"     # Replace if you renamed the repository
+  workflow_id = "retrain.yml"
+github_token: Generate a GitHub Personal Access Token (PAT) with repo and workflow scopes, and set it as an environment variable:
+   ```bash
+   export GITHUB_TOKEN="your_token_here"
+- Run the monitoring script:
+   ```bash
+   python scripts/monitor.py
+The script checks for model drift and triggers retraining if necessary.
 
 5. Automate Retraining
    1. Retraining Workflow:
