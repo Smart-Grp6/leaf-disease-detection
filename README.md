@@ -24,14 +24,15 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
 
 ### **2. Install Dependencies**
 1. Clone the repository:
+   - Clone the repository to your local machine:
    ```bash
    git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
    cd leaf-disease-detection
 
-If you forked the repository, use your forked repository's URL:
-            ```bash
-            git clone https://github.com/<YOUR_USERNAME>/leaf-disease-detection.git
-            cd leaf-disease-detection
+   - If you forked the repository, use your forked repository's URL:
+   ```bash
+   git clone https://github.com/<YOUR_USERNAME>/leaf-disease-detection.git
+   cd leaf-disease-detection
 Replace <YOUR_USERNAME> with your GitHub username.
 
 2. Create a virtual environment:
