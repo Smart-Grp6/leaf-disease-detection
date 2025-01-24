@@ -79,14 +79,14 @@ The API will return the predicted class (e.g., Healthy, Powdery, Rust).
    repo_owner = "<YOUR_USERNAME>"           # Replace with your GitHub username
    repo_name = "leaf-disease-detection"     # Replace if you renamed the repository
    ```
-github_token: Generate a GitHub Personal Access Token (PAT) with repo and workflow scopes, and set it as an environment variable:
-      ```bash
-      export GITHUB_TOKEN="your_token_here"
-       ```
+- github_token: Generate a GitHub Personal Access Token (PAT) with repo and workflow scopes, and set it as an environment variable:
+  ```bash
+  export GITHUB_TOKEN="your_token_here"
+  ```
 - Run the monitoring script:
-      ```bash
-      python scripts/monitor.py
-      ```
+  ```bash
+  python scripts/monitor.py
+  ```
 The script checks for model drift and triggers retraining if necessary.
 
 5. Automate Retraining
