@@ -79,9 +79,11 @@ The API will return the predicted class (e.g., Healthy, Powdery, Rust).
 github_token: Generate a GitHub Personal Access Token (PAT) with repo and workflow scopes, and set it as an environment variable:
    ```bash
    export GITHUB_TOKEN="your_token_here"
+    ```
 - Run the monitoring script:
    ```bash
    python scripts/monitor.py
+   ```
 The script checks for model drift and triggers retraining if necessary.
 
 5. Automate Retraining
