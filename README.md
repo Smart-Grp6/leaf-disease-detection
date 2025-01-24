@@ -28,21 +28,21 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
             git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
             cd leaf-disease-detection
       
-   If you forked the repository, use your forked repository's URL:
+1. If you forked the repository, use your forked repository's URL:
             ```bash
             git clone https://github.com/<YOUR_USERNAME>/leaf-disease-detection.git
             cd leaf-disease-detection
    Replace <YOUR_USERNAME> with your GitHub username.
 
-1. Create a virtual environment:
+2. Create a virtual environment:
    ```bash
    python -m venv venv
 
-2. Activate the virtual environment:
+3. Activate the virtual environment:
    ```bash
    .\venv\Scripts\activate
 
-3. Install the required packages:
+4. Install the required packages:
    ```bash
    pip install -r requirements.txt
 
