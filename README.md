@@ -64,10 +64,10 @@ Replace <YOUR_USERNAME> with your GitHub username.
       python app.py
 
 3. Send a POST request to the API with an image file:
-            ```bash
-            curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
-   Replace path_to_image.jpg with the path to your image file.
-   The API will return the predicted class (e.g., Healthy, Powdery, Rust).
+   ```bash
+   curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
+Replace path_to_image.jpg with the path to your image file.
+The API will return the predicted class (e.g., Healthy, Powdery, Rust).
 
 4. Monitor the Model
    - Update Monitoring Script for Your Repository:
