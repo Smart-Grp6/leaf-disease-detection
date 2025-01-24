@@ -27,7 +27,9 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
       ```bash
       git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
       cd leaf-disease-detection
+      
    If you forked the repository, use your forked repository's URL:
+      ```bash
       git clone https://github.com/<YOUR_USERNAME>/leaf-disease-detection.git
       cd leaf-disease-detection
    Replace <YOUR_USERNAME> with your GitHub username.
@@ -71,7 +73,7 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
       github_token = os.getenv("GITHUB_TOKEN")  # Set this in your environment
       repo_owner = "<YOUR_USERNAME>"           # Replace with your GitHub username
       repo_name = "leaf-disease-detection"     # Replace if you renamed the repository
-      workflow_id = "retrain.yml"              # Replace if you renamed the workflow file
+      workflow_id = "retrain.yml"
    github_token: Generate a GitHub Personal Access Token (PAT) with repo and workflow scopes, and set it as an environment variable:
       ```bash
       export GITHUB_TOKEN="your_token_here"
@@ -81,8 +83,18 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
    The script checks for model drift and triggers retraining if necessary.
 
 5. Automate Retraining
-   - The GitHub Actions workflow (.github/workflows/retrain.yml) automates retraining and deployment. It runs every Sunday at midnight or can be triggered manually.
-   - The GitHub Actions workflow (.github/workflows/monitor.yml) automates monitoring. It runs every hour or can be triggered manually.
+   1. Retraining Workflow:
+
+      - The retrain.yml workflow retrains the model every Sunday at midnight or can be triggered manually.
+
+      - It deletes the existing MLflow database, retrains the model, and deploys the updated model.
+
+
+   2. Monitoring Workflow:
+
+      - The monitor.yml workflow checks for model drift every hour or can be triggered manually.
+
+      - If model drift is detected, it triggers the retraining workflow.
 
 ## **CI/CD Pipeline**
 **The CI/CD pipeline automates the following steps:**
