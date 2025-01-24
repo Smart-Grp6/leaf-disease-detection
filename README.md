@@ -24,14 +24,14 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
 
 ### **2. Install Dependencies**
 1. Clone the repository:
-      ```bash
-      git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
-      cd leaf-disease-detection
+            ```bash
+            git clone https://github.com/Smart-Grp6/leaf-disease-detection.git
+            cd leaf-disease-detection
       
    If you forked the repository, use your forked repository's URL:
-      ```bash
-      git clone https://github.com/<YOUR_USERNAME>/leaf-disease-detection.git
-      cd leaf-disease-detection
+            ```bash
+            git clone https://github.com/<YOUR_USERNAME>/leaf-disease-detection.git
+            cd leaf-disease-detection
    Replace <YOUR_USERNAME> with your GitHub username.
 
 1. Create a virtual environment:
@@ -63,8 +63,8 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
       python app.py
 
 3. Send a POST request to the API with an image file:
-      ```bash
-      curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
+            ```bash
+            curl -X POST -F "image=@path_to_image.jpg" http://localhost:5000/predict
    Replace path_to_image.jpg with the path to your image file.
    The API will return the predicted class (e.g., Healthy, Powdery, Rust).
 
@@ -75,11 +75,11 @@ This project demonstrates how to build, deploy, and monitor a **Leaf Disease Det
       repo_name = "leaf-disease-detection"     # Replace if you renamed the repository
       workflow_id = "retrain.yml"
    github_token: Generate a GitHub Personal Access Token (PAT) with repo and workflow scopes, and set it as an environment variable:
-      ```bash
-      export GITHUB_TOKEN="your_token_here"
+            ```bash
+            export GITHUB_TOKEN="your_token_here"
    - Run the monitoring script:
-      ```bash
-      python scripts/monitor.py
+            ```bash
+            python scripts/monitor.py
    The script checks for model drift and triggers retraining if necessary.
 
 5. Automate Retraining
